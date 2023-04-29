@@ -15,8 +15,10 @@ int main() {
     srand(time(NULL));
     int random_index = rand() % number_of_choices;
 
+
+    //User choice
     char* user_choice = NULL;
-    size_t len_user_choice;
+    size_t len_user_choice = 0;
     char* computer_choice;
 
     computer_choice = choices[random_index];
@@ -27,8 +29,39 @@ int main() {
     //Dynamically allocation of memory
     getline(&user_choice, &len_user_choice, stdin);
 
-    printf("The User Choice Is %s And Computer Choice Is %s", user_choice, computer_choice);
+    //removing the /n line charcter from the string
+    // Remove the newline character from user_choice
+    char *newline_ptr = strchr(user_choice, '\n');
+    if (newline_ptr != NULL) {
+        *newline_ptr = '\0';
+    }
 
+    //Now we are have get the input and now we will check for conditions
+    if (strcmp(user_choice, "rock") == 0 && strcmp(computer_choice, "rock") == 0) {
+        printf("No one won same choices made");
+    } else if (strcmp(user_choice, "rock") == 0 && strcmp(computer_choice, "paper") == 0) {
+        printf("Computer Won because computer choosed %s", computer_choice);
+    } else if (strcmp(user_choice, "rock") == 0 && strcmp(computer_choice, "scissors") == 0) {
+        printf("User Won because computer choose %s", computer_choice);
+    }
+
+    if (strcmp(user_choice, "paper") == 0 && strcmp(computer_choice, "rock") == 0) {
+        printf("User Won because computer choosed %s", computer_choice);
+    } else if (strcmp(user_choice, "paper") == 0 && strcmp(computer_choice, "paper") == 0) {
+        printf("No one won same choices made");
+    } else if (strcmp(user_choice, "paper") == 0 && strcmp(computer_choice, "scissors") == 0) {
+        printf("Computer Won because computer choosed %s", computer_choice);
+    }
+
+    if (strcmp(user_choice, "scissors") == 0 && strcmp(computer_choice, "rock") == 0) {
+        printf("Computer Won because computer choosed %s", computer_choice);
+    } else if (strcmp(user_choice, "scissors") == 0 && strcmp(computer_choice, "paper") == 0) {
+        printf("User Won because computer choosed %s", computer_choice);
+    } else if (strcmp(user_choice, "scissors") == 0 && strcmp(computer_choice, "scissors") == 0) {
+        printf("No one won same choices made");
+    }
+
+    free(user_choice);
     
     return 0;
 }
